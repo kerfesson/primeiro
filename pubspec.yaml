@@ -1,0 +1,26 @@
+name: crud_usuario
+description: "Aplicação CRUD com SQLite e Material Design."
+
+publish_to: 'none' 
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.11.4
+
+dependencies:
+  flutter:
+    sdk: flutter
+  sqflite: ^2.0.0+4
+    #sqlite: ^2.3.3
+  path: ^1.8.3
+  cupertino_icons: ^1.0.8
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^6.0.0
+
+flutter:
+
+  uses-material-design: true
