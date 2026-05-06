@@ -15,6 +15,7 @@ class _UserFormScreenState extends State<UserFormScreen> {
 final _formKey = GlobalKey<FormState>();
 late TextEditingController _nameCtrl;
 late TextEditingController _emailCtrl;
+late TextEditingController _telefoneCtrl;
 final _db = DbHelper();
 
 bool get isEditing => widget.user != null;
@@ -24,6 +25,8 @@ void initState() {
   super.initState();
   _nameCtrl = TextEditingController(text: widget.user?.name ?? '');
   _emailCtrl = TextEditingController(text: widget.user?.email ?? '');
+  _telefoneCtrl = TextEditingController(text:widget.user?.telefone ?? '');
+
 }
 
 Future<void> _save() async {
@@ -32,7 +35,9 @@ Future<void> _save() async {
       id: widget.user?.id,
       name: _nameCtrl.text.trim(),
       email: _emailCtrl.text.trim(),
+      telefone: _telefoneCtrl.text.trim(),
     );
+  
     if (isEditing) 
       await _db.updateUser(user);
      else 
@@ -74,6 +79,13 @@ Widget build(BuildContext context) {
               controller: _emailCtrl,
               decoration: const InputDecoration(labelText: 'Email'),
               validator: (value) => value!.isEmpty ? 'Informe o email' : null,
+            ),
+            const SizedBox(height: 16),
+            TextFormField(
+              controller: _telefoneCtrl,
+              decoration: const InputDecoration(labelText: 'Telefone'),
+              validator: (value) => value!.isEmpty ? 'Informe o telefone' : null,
+              keyboardType: TextInputType.number,
             ),
             const SizedBox(height: 32),
             ElevatedButton(

@@ -1,4 +1,4 @@
-import 'package:sqflite/sqflite.dart';
+import 'package:sqflite/sqflite.dart'; 
 import 'package:path/path.dart';
 import '../models/user.dart';
 
@@ -20,15 +20,20 @@ class DbHelper {
     'users.db');
     return openDatabase(
       dbPath,
-      version: 1,
-      onCreate: (db, version) async {
-        await db.execute('''
+      version: 2,
+      onCreate: (db, version) async{ ('''
           CREATE TABLE users(
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             name TEXT,
-            email TEXT
+            email TEXT,
+            telefone TEXT,
           )
         ''');
+        OnUpgrade (db, oldVersion, newVersion) async {
+          if (oldVersion < 2) {
+            await db.execute('ALTER TABLE users ADD COLUMN telefone TEXT DEFAULT ""');
+          }
+        }
       },
     );
   }

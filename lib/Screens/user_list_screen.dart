@@ -3,6 +3,8 @@ import '../models/user.dart';
 import '../database/db_helper.dart';
 import 'user_form_screen.dart';
 
+
+
 class UserListScreen extends StatefulWidget {
   const UserListScreen({super.key});
 
@@ -13,6 +15,8 @@ class UserListScreen extends StatefulWidget {
 class _UserListScreenState extends State<UserListScreen> {
   final DbHelper _db= DbHelper();
   List<User> _users = [];
+  final List<User> _filteredUsers = [];
+  final _seachCtrl = TextEditingController();
 
   @override
   void initState() {
@@ -70,6 +74,7 @@ class _UserListScreenState extends State<UserListScreen> {
                 ),
               )
             ),
+
             Expanded(
               child: _users.isEmpty
                 ? const Center(
